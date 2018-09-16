@@ -8,6 +8,7 @@ import android.widget.BaseAdapter;
 
 import java.util.ArrayList;
 
+import co.intentservice.chatui.ChatView;
 import co.intentservice.chatui.models.ChatMessage;
 import co.intentservice.chatui.viewholders.MessageViewHolder;
 import co.intentservice.chatui.views.ViewBuilder;
@@ -25,6 +26,7 @@ public class ChatViewListAdapter extends BaseAdapter {
     public final int STATUS_SENT = 0;
     public final int STATUS_RECEIVED = 1;
 
+    private ChatView.OnImageTapListener onImageTapListener;
     private int backgroundRcv, backgroundSend;
     private int bubbleBackgroundRcv, bubbleBackgroundSend;
     private float bubbleElevation;
@@ -48,6 +50,10 @@ public class ChatViewListAdapter extends BaseAdapter {
         this.bubbleBackgroundSend = bubbleBackgroundSend;
         this.bubbleElevation = bubbleElevation;
         this.viewBuilder = viewBuilder;
+    }
+
+    public void addOnImageTapListener(ChatView.OnImageTapListener onImageTapListener){
+        this.onImageTapListener = onImageTapListener;
     }
 
     @Override
@@ -100,6 +106,7 @@ public class ChatViewListAdapter extends BaseAdapter {
         else
             holder.setMessage(chatMessages.get(position).getMessage());
 
+        holder.setOnImageTapListener(onImageTapListener, chatMessages.get(position).getMessage());
         holder.setTimestamp(chatMessages.get(position).getFormattedTime());
         holder.setElevation(bubbleElevation);
         holder.setBackground(type);

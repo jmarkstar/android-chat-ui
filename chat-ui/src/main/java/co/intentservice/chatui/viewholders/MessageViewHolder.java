@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.v4.content.ContextCompat;
 import android.view.View;
 
+import co.intentservice.chatui.ChatView;
 import co.intentservice.chatui.R;
 import co.intentservice.chatui.views.MessageView;
 
@@ -35,6 +36,10 @@ public class MessageViewHolder {
         this.backgroundSend = backgroundSend;
         this.bubbleBackgroundSend = bubbleBackgroundSend;
         this.bubbleBackgroundRcv = bubbleBackgroundRcv;
+    }
+
+    public void setOnImageTapListener(ChatView.OnImageTapListener onImageTapListener, String url){
+        messageView.setOnImageTapListener(onImageTapListener, url);
     }
 
     public void setImageMessage(String url){

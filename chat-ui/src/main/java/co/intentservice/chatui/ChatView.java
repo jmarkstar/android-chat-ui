@@ -374,6 +374,10 @@ public class ChatView extends RelativeLayout {
         this.typingListener = typingListener;
     }
 
+    public void setOnImageTapListener(OnImageTapListener onImageTapListener){
+        chatViewListAdapter.addOnImageTapListener(onImageTapListener);
+    }
+
     public void setOnAttachListener(OnAttachListener onAttachListener){
         this.onAttachListener = onAttachListener;
     }
@@ -427,6 +431,10 @@ public class ChatView extends RelativeLayout {
 
         void userStoppedTyping();
 
+    }
+
+    public interface  OnImageTapListener{
+        void imageTap(String url);
     }
 
     public interface OnAttachListener {

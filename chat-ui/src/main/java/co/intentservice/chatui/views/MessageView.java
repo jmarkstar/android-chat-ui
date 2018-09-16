@@ -5,6 +5,7 @@ import android.util.AttributeSet;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
+import co.intentservice.chatui.ChatView;
 import co.intentservice.chatui.R;
 
 /**
@@ -17,6 +18,8 @@ import co.intentservice.chatui.R;
 public abstract class MessageView extends FrameLayout {
 
     private TextView senderTextView;
+
+    public abstract void setOnImageTapListener(ChatView.OnImageTapListener onImageTapListener, String url);
 
     public abstract void setImageMessage(String url);
 

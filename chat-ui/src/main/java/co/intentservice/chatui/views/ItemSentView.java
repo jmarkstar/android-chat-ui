@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
 import com.facebook.drawee.view.SimpleDraweeView;
+
+import co.intentservice.chatui.ChatView;
 import co.intentservice.chatui.R;
 import co.intentservice.chatui.utils.ImageLoader;
 
@@ -21,6 +23,19 @@ public class ItemSentView extends MessageView {
     private CardView bubble;
     private TextView messageTextView, timestampTextView;
     private SimpleDraweeView simpleDraweeView;
+
+    @Override public void setOnImageTapListener(final ChatView.OnImageTapListener onImageTapListener, final String url) {
+
+        if(simpleDraweeView == null){
+            simpleDraweeView = (SimpleDraweeView)findViewById(R.id.image_view);
+        }
+
+        simpleDraweeView.setOnClickListener(new OnClickListener() {
+            @Override public void onClick(View v) {
+                onImageTapListener.imageTap(url);
+            }
+        });
+    }
 
     @Override public void setImageMessage(String url) {
 

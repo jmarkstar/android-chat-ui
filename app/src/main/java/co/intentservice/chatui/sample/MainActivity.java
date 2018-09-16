@@ -24,6 +24,12 @@ public class MainActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this, permissions, 1000);
 
         ChatView chatView = (ChatView) findViewById(R.id.chat_view);
+        chatView.setOnImageTapListener(new ChatView.OnImageTapListener() {
+            @Override
+            public void imageTap(String url) {
+                Toast.makeText(MainActivity.this, ""+url, Toast.LENGTH_SHORT).show();
+            }
+        });
 
         chatView.addMessage(new ChatMessage("Message received", System.currentTimeMillis(), ChatMessage.Type.RECEIVED, ChatMessage.ContentType.TEXT));
 
