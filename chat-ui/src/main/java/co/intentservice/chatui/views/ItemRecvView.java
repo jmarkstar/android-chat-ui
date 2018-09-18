@@ -35,7 +35,8 @@ public class ItemRecvView extends MessageView {
 
         simpleDraweeView.setOnClickListener(new OnClickListener() {
             @Override public void onClick(View v) {
-                onImageTapListener.imageTap(url);
+                if(onImageTapListener != null)
+                    onImageTapListener.imageTap(url);
             }
         });
     }
