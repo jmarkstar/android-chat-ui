@@ -86,7 +86,6 @@ public class ItemSentView extends MessageView {
             timestampTextView = (TextView) findViewById(R.id.timestamp_text_view);
         }
 
-        messageTextView.setVisibility(View.VISIBLE);
         timestampTextView.setText(timestamp);
 
     }
