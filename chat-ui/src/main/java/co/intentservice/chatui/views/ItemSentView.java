@@ -4,6 +4,7 @@ import android.content.Context;
 import android.support.annotation.ColorInt;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -60,7 +61,7 @@ public class ItemSentView extends MessageView {
      * @param message   The message that you want to be displayed.
      */
     public void setMessage(String message) {
-
+        
         if(simpleDraweeView == null){
             simpleDraweeView = (SimpleDraweeView)findViewById(R.id.image_view);
         }
@@ -71,6 +72,8 @@ public class ItemSentView extends MessageView {
 
             messageTextView = (TextView) findViewById(R.id.message_text_view);
         }
+
+        messageTextView.setVisibility(View.VISIBLE);
 
         messageTextView.setText(message);
     }

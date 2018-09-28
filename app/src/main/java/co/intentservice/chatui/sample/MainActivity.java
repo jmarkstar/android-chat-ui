@@ -15,18 +15,16 @@ import co.intentservice.chatui.models.ChatMessage;
 
 public class MainActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         String [] permissions = { Manifest.permission.READ_EXTERNAL_STORAGE};
         ActivityCompat.requestPermissions(this, permissions, 1000);
 
-        ChatView chatView = (ChatView) findViewById(R.id.chat_view);
+        final ChatView chatView = (ChatView) findViewById(R.id.chat_view);
         chatView.setOnImageTapListener(new ChatView.OnImageTapListener() {
-            @Override
-            public void imageTap(String url) {
+            @Override public void imageTap(String url) {
                 Toast.makeText(MainActivity.this, ""+url, Toast.LENGTH_SHORT).show();
             }
         });

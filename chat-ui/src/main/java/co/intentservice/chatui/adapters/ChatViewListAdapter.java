@@ -104,9 +104,10 @@ public class ChatViewListAdapter extends BaseAdapter {
         if(chatMessages.get(position).getContentType() == ChatMessage.ContentType.IMAGE) {
             holder.setImageMessage(chatMessages.get(position).getMessage());
             holder.setOnImageTapListener(onImageTapListener, chatMessages.get(position).getMessage());
-        } else
+        } else {
             holder.setMessage(chatMessages.get(position).getMessage());
-        
+        }
+
         holder.setTimestamp(chatMessages.get(position).getFormattedTime());
         holder.setElevation(bubbleElevation);
         holder.setBackground(type);
