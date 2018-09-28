@@ -15,6 +15,17 @@ public class ChatMessage {
     private Type type;
     private ContentType contentType;
     private String sender;
+    private Integer imageWidth = 0;
+    private Integer imageHeight = 0;
+
+    public ChatMessage(String message, long timestamp, Type type, ContentType contentType, Integer imageWidth, Integer imageHeight) {
+        this.message = message;
+        this.timestamp = timestamp;
+        this.type = type;
+        this.contentType = contentType;
+        this.imageWidth = imageWidth;
+        this.imageHeight = imageHeight;
+    }
 
     public ChatMessage(String message, long timestamp, Type type, ContentType contentType) {
         this.message = message;
@@ -26,6 +37,22 @@ public class ChatMessage {
     public ChatMessage(String message, long timestamp, Type type, ContentType contentType, String sender) {
         this(message, timestamp, type, contentType);
         this.sender = sender;
+    }
+
+    public Integer getImageWidth() {
+        return imageWidth;
+    }
+
+    public void setImageWidth(Integer imageWidth) {
+        this.imageWidth = imageWidth;
+    }
+
+    public Integer getImageHeight() {
+        return imageHeight;
+    }
+
+    public void setImageHeight(Integer imageHeight) {
+        this.imageHeight = imageHeight;
     }
 
     public long getTimestamp() {

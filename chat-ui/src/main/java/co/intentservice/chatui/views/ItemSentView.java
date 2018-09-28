@@ -61,7 +61,7 @@ public class ItemSentView extends MessageView {
      * @param message   The message that you want to be displayed.
      */
     public void setMessage(String message) {
-        
+
         if(simpleDraweeView == null){
             simpleDraweeView = (SimpleDraweeView)findViewById(R.id.image_view);
         }
