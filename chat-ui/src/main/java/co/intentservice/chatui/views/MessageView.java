@@ -19,9 +19,7 @@ public abstract class MessageView extends FrameLayout {
 
     private TextView senderTextView;
 
-    public abstract void setOnImageTapListener(ChatView.OnImageTapListener onImageTapListener, String url);
-
-    public abstract void setImageMessage(String url);
+    public abstract void setImageMessage(String url, ChatView.OnImageTapListener onImageTapListener, int width, int heigth);
 
     /**
      * Method to set the messages text in the view so it can be displayed on the screen.

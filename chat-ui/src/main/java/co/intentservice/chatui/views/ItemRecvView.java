@@ -4,9 +4,11 @@ import android.content.Context;
 import android.support.annotation.ColorInt;
 import android.support.v7.widget.CardView;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
@@ -27,21 +29,7 @@ public class ItemRecvView extends MessageView {
     private TextView messageTextView, timestampTextView;
     private SimpleDraweeView simpleDraweeView;
 
-    @Override public void setOnImageTapListener(final ChatView.OnImageTapListener onImageTapListener, final String url) {
-
-        if(simpleDraweeView == null){
-            simpleDraweeView = (SimpleDraweeView)findViewById(R.id.image_view);
-        }
-
-        simpleDraweeView.setOnClickListener(new OnClickListener() {
-            @Override public void onClick(View v) {
-                if(onImageTapListener != null)
-                    onImageTapListener.imageTap(url);
-            }
-        });
-    }
-
-    @Override public void setImageMessage(String url) {
+    @Override public void setImageMessage(final String url, final ChatView.OnImageTapListener onImageTapListener, int width, int heigth) {
 
         if (messageTextView == null) {
             messageTextView = (TextView) findViewById(R.id.message_text_view);
@@ -54,6 +42,41 @@ public class ItemRecvView extends MessageView {
         }
 
         simpleDraweeView.setVisibility(View.VISIBLE);
+
+        simpleDraweeView.setOnClickListener(new OnClickListener() {
+            @Override public void onClick(View v) {
+                if(onImageTapListener != null)
+                    onImageTapListener.imageTap(url);
+            }
+        });
+
+        if(width == 0 && heigth == 0){
+            return;
+        }
+
+        double density = simpleDraweeView.getContext().getResources().getDisplayMetrics().density;
+
+        double maxWidth = density*200;
+        double photoWidth = (double)width;
+        double photoHeight = (double)heigth;
+
+        Log.v("item","maxWidth: "+maxWidth+", width: "+photoWidth+", heigth: "+photoHeight);
+
+        int ivHeight = 0;
+        int ivWidth = (int)maxWidth;
+
+        if(photoWidth >= maxWidth){
+
+            double ratio = photoWidth/maxWidth;
+            ivHeight = (int)(photoHeight/ratio);
+        } else {
+
+            double ratio = photoWidth/photoWidth;
+            ivHeight= (int)(photoHeight*ratio);
+        }
+
+        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams( ivWidth, ivHeight);
+        simpleDraweeView.setLayoutParams(layoutParams);
 
         ImageLoader.load(url, simpleDraweeView);
     }

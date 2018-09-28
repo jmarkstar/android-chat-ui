@@ -38,13 +38,9 @@ public class MessageViewHolder {
         this.bubbleBackgroundRcv = bubbleBackgroundRcv;
     }
 
-    public void setOnImageTapListener(ChatView.OnImageTapListener onImageTapListener, String url){
-        messageView.setOnImageTapListener(onImageTapListener, url);
-    }
+    public void setImageMessage(String url, ChatView.OnImageTapListener onImageTapListener, int width, int heigth){
 
-    public void setImageMessage(String url){
-
-        messageView.setImageMessage(url);
+        messageView.setImageMessage(url, onImageTapListener, width, heigth);
     }
 
     public void setMessage(String message) {
