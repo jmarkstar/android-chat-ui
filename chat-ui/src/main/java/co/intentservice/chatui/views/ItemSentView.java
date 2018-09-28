@@ -48,6 +48,8 @@ public class ItemSentView extends MessageView {
         });
 
         if(width == 0 && heigth == 0){
+
+            ImageLoader.load(url, simpleDraweeView);
             return;
         }
 
