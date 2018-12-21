@@ -16,7 +16,7 @@
         <!--<item name="sendBtnElevation">4dp</item>-->
         <item name="sendBtnIcon">@drawable/ic_send_white_24dp</item>
         <item name="sendBtnIconTint">@color/white</item>
-        <item name="sendBtnBackgroundTint">?attr/colorAccent</item>
+        <item name="sendBtnBackgroundTint">@color/send_button_color</item>
 
         <item name="backgroundRcv">@color/default_chat_message_background_color_rcv</item>
         <item name="backgroundSend">@color/default_chat_message_background_color_send</item>
