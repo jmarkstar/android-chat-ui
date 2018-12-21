@@ -73,6 +73,7 @@ public class ChatView extends RelativeLayout {
     private TypedArray attributes, textAppearanceAttributes;
     private Context context;
     private long timeNotTyping = 500;
+    private RelativeLayout rlAttach;
 
     ChatView(Context context) {
         this(context, null);
@@ -110,6 +111,7 @@ public class ChatView extends RelativeLayout {
         chatListView = (ListView) findViewById(R.id.chat_list);
         inputFrame = (CardView) findViewById(R.id.input_frame);
         inputEditText = (EditText) findViewById(R.id.input_edit_text);
+        rlAttach = findViewById(R.id.rlAttach);
         actionsMenu = (FloatingActionsMenu) findViewById(R.id.sendButton);
 
         ImageView ivAttach = (ImageView)findViewById(R.id.iv_attach);
@@ -331,6 +333,8 @@ public class ChatView extends RelativeLayout {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.length() > 0) {
 
+                    rlAttach.setVisibility(View.GONE);
+
                     if (!isTyping) {
                         isTyping = true;
                         if (typingListener != null) typingListener.userStartedTyping();
@@ -338,6 +342,9 @@ public class ChatView extends RelativeLayout {
 
                     removeCallbacks(typingTimerRunnable);
                     postDelayed(typingTimerRunnable, timeNotTyping);
+                } else {
+
+                    rlAttach.setVisibility(View.VISIBLE);
                 }
             }
 
