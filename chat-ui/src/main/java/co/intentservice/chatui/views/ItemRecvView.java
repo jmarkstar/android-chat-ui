@@ -1,8 +1,18 @@
 package co.intentservice.chatui.views;
 
 import android.content.Context;
+import android.content.Intent;
+import android.graphics.Color;
+import android.net.Uri;
 import android.support.annotation.ColorInt;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
+import android.text.Spannable;
+import android.text.SpannableStringBuilder;
+import android.text.method.LinkMovementMethod;
+import android.text.style.ClickableSpan;
+import android.text.style.ForegroundColorSpan;
+import android.text.style.UnderlineSpan;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,6 +22,12 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.facebook.drawee.view.SimpleDraweeView;
+
+import org.nibor.autolink.LinkExtractor;
+import org.nibor.autolink.LinkSpan;
+import org.nibor.autolink.LinkType;
+
+import java.util.EnumSet;
 
 import co.intentservice.chatui.ChatView;
 import co.intentservice.chatui.R;
@@ -87,7 +103,7 @@ public class ItemRecvView extends MessageView {
      * Method to set the messages text in the view so it can be displayed on the screen.
      * @param message   The message that you want to be displayed.
      */
-    public void setMessage(String message) {
+    public void setMessage(final String message) {
 
         if(simpleDraweeView == null){
             simpleDraweeView = (SimpleDraweeView)findViewById(R.id.image_view);
@@ -100,8 +116,38 @@ public class ItemRecvView extends MessageView {
             messageTextView = (TextView) findViewById(R.id.message_text_view);
         }
 
+        LinkExtractor linkExtractor = LinkExtractor.builder().linkTypes(EnumSet.of(LinkType.URL, LinkType.WWW)).build();
+
+        Iterable<LinkSpan> links = linkExtractor.extractLinks(message);
+
+        SpannableStringBuilder builder = new SpannableStringBuilder(message);
+
+        for(final LinkSpan link: links) {
+
+            final int start = link.getBeginIndex();
+            final int end = link.getEndIndex();
+
+            ClickableSpan clickableSpan = new ClickableSpan() {
+
+                @Override public void onClick(@NonNull View widget) {
+                    String linkString = message.substring(start, end);
+                    if (link.getType() == LinkType.WWW){
+                        linkString = "http://" + linkString;
+                    }
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(linkString));
+                    widget.getContext().startActivity(browserIntent);
+                }
+            };
+
+            builder.setSpan(new ForegroundColorSpan(Color.BLUE), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            builder.setSpan(new UnderlineSpan(), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            builder.setSpan(clickableSpan, start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+
         messageTextView.setVisibility(View.VISIBLE);
-        messageTextView.setText(message);
+
+        messageTextView.setText(builder);
+        messageTextView.setMovementMethod(LinkMovementMethod.getInstance());
     }
 
     /**

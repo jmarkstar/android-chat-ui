@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        chatView.addMessage(new ChatMessage("Message received", System.currentTimeMillis(), ChatMessage.Type.RECEIVED, ChatMessage.ContentType.TEXT));
+        chatView.addMessage(new ChatMessage("Message received https://search.maven.org/artifact/org.nibor.autolink/autolink/0.10.0/jar", System.currentTimeMillis(), ChatMessage.Type.RECEIVED, ChatMessage.ContentType.TEXT));
 
         chatView.addMessage(new ChatMessage("http://app.chasquihost.com/media/imagenes-de-chat/405ae0cb4a7d4d888d3277fb4c2d5b9d.png", System.currentTimeMillis(), ChatMessage.Type.RECEIVED, ChatMessage.ContentType.IMAGE, 739, 415));//739 - 415
 
@@ -41,7 +41,10 @@ public class MainActivity extends AppCompatActivity {
         chatView.addMessage(new ChatMessage("http://app.chasquihost.com/media/imagenes-de-chat/a0ce04eee53845f78c84238975ff7d97.png", System.currentTimeMillis(), ChatMessage.Type.SENT, ChatMessage.ContentType.IMAGE, 875, 350));//875 - 350
 
 
-        chatView.addMessage(new ChatMessage("A message with a sender name", System.currentTimeMillis(), ChatMessage.Type.RECEIVED, ChatMessage.ContentType.TEXT, "Ryan Java"));
+        chatView.addMessage(new ChatMessage("A message with a sender name https://travis-ci.org/", System.currentTimeMillis(), ChatMessage.Type.RECEIVED, ChatMessage.ContentType.TEXT, "Ryan Java"));
+
+        chatView.addMessage(new ChatMessage("google google www.google.com aaa", System.currentTimeMillis(), ChatMessage.Type.RECEIVED, ChatMessage.ContentType.TEXT, "Ryan Java"));
+
 
         chatView.setOnSentMessageListener(new ChatView.OnSentMessageListener() {
             @Override public boolean sendMessage(ChatMessage chatMessage) {
