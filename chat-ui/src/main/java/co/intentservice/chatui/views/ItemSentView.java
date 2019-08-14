@@ -1,5 +1,7 @@
 package co.intentservice.chatui.views;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -19,6 +21,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import com.facebook.drawee.view.SimpleDraweeView;
 
 import org.nibor.autolink.LinkExtractor;
@@ -26,6 +30,7 @@ import org.nibor.autolink.LinkSpan;
 import org.nibor.autolink.LinkType;
 
 import java.util.EnumSet;
+import java.util.Iterator;
 
 import co.intentservice.chatui.ChatView;
 import co.intentservice.chatui.R;
@@ -119,7 +124,11 @@ public class ItemSentView extends MessageView {
 
         SpannableStringBuilder builder = new SpannableStringBuilder(message);
 
+        int linkSize = 0;
+
         for(final LinkSpan link: links) {
+
+            linkSize++;
 
             final int start = link.getBeginIndex();
             final int end = link.getEndIndex();
@@ -143,8 +152,25 @@ public class ItemSentView extends MessageView {
 
         messageTextView.setVisibility(View.VISIBLE);
 
-        messageTextView.setText(builder);
-        messageTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        if(linkSize > 0) {
+            messageTextView.setText(builder);
+            messageTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        } else {
+            messageTextView.setText(message);
+        }
+
+        this.setOnLongClickListener(new OnLongClickListener() {
+            @Override public boolean onLongClick(View v) {
+
+                ClipboardManager clipboard = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipData clip = ClipData.newPlainText("message", message);
+                clipboard.setPrimaryClip(clip);
+
+                Toast.makeText(getContext(), getContext().getString(R.string.copied), Toast.LENGTH_SHORT).show();
+
+                return false;
+            }
+        });
     }
 
     /**
