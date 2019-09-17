@@ -95,8 +95,8 @@ public class ChatMessage {
         long timeDifference = System.currentTimeMillis() - timestamp;
 
         return timeDifference < oneDayInMillis
-                ? DateFormat.format("hh:mm a", timestamp).toString()
-                : DateFormat.format("dd MMM - hh:mm a", timestamp).toString();
+                ? DateFormat.format("h:mm a", timestamp).toString()
+                : DateFormat.format("dd MMM - h:mm a", timestamp).toString();
     }
 
     public String getSender() {

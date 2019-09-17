@@ -38,10 +38,10 @@ public class MainActivity extends AppCompatActivity {
         chatView.addMessage(new ChatMessage("http://app.chasquihost.com/media/imagenes-de-chat/3203b8b84bce4c7db5a5f7474aa5b1b3.png", System.currentTimeMillis(), ChatMessage.Type.RECEIVED, ChatMessage.ContentType.IMAGE, 678, 452));//678 - 452
 
 
-        chatView.addMessage(new ChatMessage("http://app.chasquihost.com/media/imagenes-de-chat/a0ce04eee53845f78c84238975ff7d97.png", System.currentTimeMillis(), ChatMessage.Type.SENT, ChatMessage.ContentType.IMAGE, 875, 350));//875 - 350
+        chatView.addMessage(new ChatMessage("http://app.chasquihost.com/media/imagenes-de-chat/a0ce04eee53845f78c84238975ff7d97.png", 1568677500000L, ChatMessage.Type.SENT, ChatMessage.ContentType.IMAGE, 875, 350));//875 - 350
 
 
-        chatView.addMessage(new ChatMessage("A message with a sender name https://travis-ci.org/", System.currentTimeMillis(), ChatMessage.Type.RECEIVED, ChatMessage.ContentType.TEXT, "Ryan Java"));
+        chatView.addMessage(new ChatMessage("A message with a sender name https://travis-ci.org/", 1568681100000L, ChatMessage.Type.RECEIVED, ChatMessage.ContentType.TEXT, "Ryan Java"));
 
         chatView.addMessage(new ChatMessage("google google www.google.com aaa", System.currentTimeMillis(), ChatMessage.Type.RECEIVED, ChatMessage.ContentType.TEXT, "Ryan Java"));
 
